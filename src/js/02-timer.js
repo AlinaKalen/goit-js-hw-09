@@ -44,11 +44,16 @@ startButton.addEventListener("click", function() {
 });
 
 function updateTimer() {
-    const now = new Date();
-    const timeRemaining = targetDate - now;
+  const now = new Date();
+  const timeRemaining = targetDate - now;
+  if (timeRemaining <= 0) {
+    clearInterval(countdownInterval);
+    timerElement.textContent = "00:00:00:00"; 
+  } else {
     let date = convertMs(timeRemaining);
     let formattedTime = `${date.days} Days\n${date.hours} Hours\n${date.minutes} Minutes\n${date.seconds} Seconds`;
-    timerElement.textContent = formattedTime; 
+    timerElement.textContent = formattedTime;
+  }
 }
 
 function convertMs(ms) {
@@ -68,5 +73,4 @@ function convertMs(ms) {
   
     return { days, hours, minutes, seconds };
   }
- 
   
