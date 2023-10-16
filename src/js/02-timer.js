@@ -18,7 +18,7 @@ const options = {
       startButton.disabled = true;
     } else {
       startButton.removeAttribute("disabled");
-      targetDate = selectedDate; // Set the targetDate when a valid date is selected
+      targetDate = selectedDate; 
     }
   }
 };
@@ -47,26 +47,28 @@ function updateTimer() {
     const now = new Date();
     const timeRemaining = targetDate - now;
     let date = convertMs(timeRemaining);
-    let formattedTime = date.days + " Days" + date.hours + " Hours" + date.minutes + " Minutes" + date.seconds + " Seconds";
+    let formattedTime = `${date.days} Days\n${date.hours} Hours\n${date.minutes} Minutes\n${date.seconds} Seconds`;
     timerElement.textContent = formattedTime; 
 }
 
 function convertMs(ms) {
-    // Number of milliseconds per unit of time
     const second = 1000;
     const minute = second * 60;
     const hour = minute * 60;
     const day = hour * 24;
   
-    // Remaining days
+
     const days = Math.floor(ms / day);
-    // Remaining hours
+   
     const hours = Math.floor((ms % day) / hour);
-    // Remaining minutes
+    
     const minutes = Math.floor(((ms % day) % hour) / minute);
-    // Remaining seconds
+   
     const seconds = Math.floor((((ms % day) % hour) % minute) / second);
   
     return { days, hours, minutes, seconds };
+  }
+  function addLeadingZero(value) {
+    return String(value).padStart(2, '0');
   }
   
